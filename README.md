@@ -1,0 +1,2 @@
+# Show_Img_in_PC_from_OpenMV_by_UART
+OpenMV通过串口传送图片到电脑并显示
