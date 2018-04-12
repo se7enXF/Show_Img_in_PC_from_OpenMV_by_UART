@@ -16,7 +16,7 @@ while(True):
     #clock.tick()
     img = sensor.snapshot()                 #获取原始图片（RGB565或灰度）
     formate = img.format()
-    pic = img.compress(quality=60)          #压缩后图片为jpeg格式
+    pic = img.compress(quality=80)          #压缩后图片为jpeg格式
     #print(pic)
 
     uart.write("$7$"+str(pic.width()))      #160

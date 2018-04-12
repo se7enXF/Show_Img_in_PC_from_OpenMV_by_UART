@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*
+'''
+OpenMV串口接收图片数据，PC端程序
+作者：se7en
+2018年4月12日 19:10:16
+'''
+
 import serial
 import serial.tools.list_ports
 import numpy as np
 import cv2
-import time
-import sys
 
 pic_dir = "F:\\"
 port_list = list(serial.tools.list_ports.comports())
