@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*
 '''
 OpenMV串口接收图片数据，PC端程序
-作者：se7en
-2018年4月12日 19:10:16
+作者：se7en,凡哥
+2018年4月15日 14:43:18
 '''
 
 import serial
@@ -18,7 +18,8 @@ if len(port_list) <= 0:
 else:
     port_list_0 =list(port_list[0])                     #第一个串口
     port_serial = port_list_0[0]                        #串口号
-    ser = serial.Serial(port_serial,115200,timeout=0.5) #初始化
+    #ser = serial.Serial(port_serial,115200,timeout=0.5) #初始化
+    ser = serial.Serial(port_serial,921600,timeout=0.5)
     ser.bytesize=8                                      #8位字符
     ser.stopbits=1                                      #1位停止位                        
     print("Waiting data from:"+ser.name)

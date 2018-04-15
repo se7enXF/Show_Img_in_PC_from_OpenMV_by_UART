@@ -1,2 +1,3 @@
-# Show_Img_in_PC_from_OpenMV_by_UART
-OpenMV通过串口传送图片到电脑并显示
+﻿# Show_Img_in_PC_from_OpenMV_by_UART
+##OpenMV通过串口传送图片到电脑并显示
+STM32F4串口最大波特率为921600，在这个波特率下，OpenMV压缩图片质量为90，传送的FPS高于30，可以正常使用。
