@@ -2,7 +2,8 @@
 '''
 OpenMV串口接收图片数据，PC端程序
 作者：se7en,凡哥
-2018年4月15日 14:43:18
+2018年4月17日 11:31:18
+凡哥OpenMV广场QQ群：564048763
 '''
 
 import serial
@@ -18,18 +19,17 @@ if len(port_list) <= 0:
 else:
     port_list_0 =list(port_list[0])                     #第一个串口
     port_serial = port_list_0[0]                        #串口号
-    #ser = serial.Serial(port_serial,115200,timeout=0.5) #初始化
     ser = serial.Serial(port_serial,921600,timeout=0.5)
     ser.bytesize=8                                      #8位字符
     ser.stopbits=1                                      #1位停止位                        
     print("Waiting data from:"+ser.name)
     print("Plot the image window.Receiving data...")
-    cv2.namedWindow('OpenMV Image',flags=cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO | cv2.WINDOW_GUI_EXPANDED)
-    cv2.resizeWindow('OpenMV Image', 160*4,120*4)
+    cv2.namedWindow('OpenMV Image',flags=cv2.WINDOW_NORMAL |
+                     cv2.WINDOW_KEEPRATIO | cv2.WINDOW_GUI_EXPANDED)
+    cv2.resizeWindow('OpenMV Image', 160*4,120*4)       #图片放大4倍
     cv2.moveWindow('OpenMV Image',100,100)
     
     while(1):
-
         head = ser.readline()
         #读取数据头帧，以\n换行结束
         if head == "" or len(head)<15 or head[-15:-12] != "$7$":
@@ -54,7 +54,7 @@ else:
         data = ser.read(pic_size+2)
         #2种读取串口方法，上面是读取固定长度
         #下面是“直到特征值”形读取方法
-        #data = ser.read_until("$_$",pic_size+4)
+        #data = ser.read_until("$",pic_size+2)
         
         if(data[0] != "$" or data[-1] != "$"):
             print("wrong picture data!")
@@ -73,6 +73,7 @@ else:
             k = cv2.waitKey(20)
         else:
             print("Read data wrong.")
+        #按q键退出程序
         if k == ord('q'):
             cv2.destroyWindow('OpenMV Image')
             break
