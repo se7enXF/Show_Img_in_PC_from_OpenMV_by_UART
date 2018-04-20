@@ -2,7 +2,7 @@
 '''
 OpenMV串口接收图片数据，PC端程序
 作者：se7en,凡哥
-2018年4月17日 11:31:18
+2018年4月20日 14:54:27
 凡哥OpenMV广场QQ群：564048763
 '''
 
@@ -33,6 +33,12 @@ else:
         head = ser.readline()
         #读取数据头帧，以\n换行结束
         if head == "" or len(head)<15 or head[-15:-12] != "$7$":
+            img_t = cv2.imread("wait.jpg")
+            cv2.imshow('OpenMV Image',img_t)
+            k = cv2.waitKey(20)
+            if k == ord('q'):
+                cv2.destroyWindow('OpenMV Image')
+                break
             continue
         
         pic_W    = int(head[-12:-9])    #图像宽度
@@ -40,8 +46,6 @@ else:
         pic_F    = int(head[-6])        #图像类型
         pic_size = int(head[-5:])       #图像大小
         
-        #print("W:"+str(pic_W)+" H:"+str(pic_H)+" F:"+str(pic_F))
-        #print("pic_size:"+str(pic_size))
         if pic_F == 1:
             cv2_formate = cv2.IMREAD_COLOR
         else:
@@ -70,15 +74,15 @@ else:
             img_arr = np.fromstring(data[1:-1], np.uint8)
             img = cv2.imdecode(img_arr,cv2_formate)
             cv2.imshow('OpenMV Image',img)
-            k = cv2.waitKey(20)
+            #或者使用cv2.imwrite(pic_dir+"pic.jpeg", img)保存图像
         else:
             print("Read data wrong.")
         #按q键退出程序
+        k = cv2.waitKey(20)
         if k == ord('q'):
             cv2.destroyWindow('OpenMV Image')
             break
-            
-        
+ 
 
        
     

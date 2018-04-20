@@ -28,5 +28,3 @@ while(True):
     uart.write("$")                         #图片头帧
     uart.write(pic)                         #图片
     uart.write("$_$")                       #图片尾帧
-
-
